@@ -42,6 +42,7 @@ group :development, :test do
 
   # Ensure consistent styling
   gem 'rubocop', require: false
+  gem 'rubocop-rspec'
 
   # Let's write specs, not tests
   gem 'rspec-rails', '~> 3.5'
