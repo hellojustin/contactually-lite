@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgres as the database for Active Record
+gem 'pg', '~> 0.19.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -23,21 +23,18 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# Stuff to keep our envs straight:
+gem 'foreman', '~> 0.82.0'
+gem 'rails_12factor', '~> 0.0.3'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background.
   # Read more: https://github.com/rails/spring
@@ -45,4 +42,7 @@ group :development, :test do
 
   # Ensure consistent styling
   gem 'rubocop', require: false
+
+  # Let's write specs, not tests
+  gem 'rspec-rails', '~> 3.5'
 end

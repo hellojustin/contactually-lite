@@ -1,9 +1,12 @@
+[![Build Status](https://travis-ci.org/hellojustin/contactually-lite.svg?branch=env-prep)](https://travis-ci.org/hellojustin/contactually-lite)
+
+
 ### Contactually Lite
 
 At its core, Contactually is an online database for your contacts. Your task
 is to build a very basic web interface for this database that accepts file
 uploads, stores the data in a relational database, and displays the information
-back to the user. This is an un-timed exercise, though most applicants submit 
+back to the user. This is an un-timed exercise, though most applicants submit
 within a few days to a week.
 
 

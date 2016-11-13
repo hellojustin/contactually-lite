@@ -4,3 +4,6 @@
 require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
+
+desc 'The default task (runs specs)'
+task :default => [:spec, :environment] {}
