@@ -59,4 +59,24 @@ describe Contact, type: :model do
     end
   end
 
+  context 'instance with an extended phone number' do
+    let(:contact) { create :contact, phone_number: '1-033-511-1831 x471' }
+    it 'provides the base phone number' do
+      expect(contact.phone_number_base).to eq('10335111831')
+    end
+    it 'provides the phone number extension' do
+      expect(contact.phone_number_extension).to eq('471')
+    end
+  end
+
+  context 'instance with a simple phone number' do
+    let(:contact) { create :contact, phone_number: '1-033-511-1831' }
+    it 'provides the base phone number' do
+      expect(contact.phone_number_base).to eq('10335111831')
+    end
+    it 'provides a nil phone number extension' do
+      expect(contact.phone_number_extension).to eq(nil)
+    end
+  end
+
 end
