@@ -9,6 +9,8 @@ Rails.application.load_tasks
 desc 'The default task (runs :spec and :rubocop)'
 task default: [:rubocop, :spec] {}
 
-RuboCop::RakeTask.new do |task|
-  task.requires << 'rubocop-rspec'
+unless Rails.env.production?
+  RuboCop::RakeTask.new do |task|
+    task.requires << 'rubocop-rspec'
+  end
 end
