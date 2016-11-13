@@ -11,7 +11,7 @@ RSpec.describe ContactsController, type: :controller do
     end
 
     it 'responds with 200' do
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
     end
     it 'responds with json' do
       expect(response.content_type).to eq('application/json')

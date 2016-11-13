@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe Contact, type: :model do
+
   context 'database' do
     context 'columns' do
       it { is_expected.to have_db_column(:first_name).of_type(:string) }
@@ -21,6 +22,7 @@ describe Contact, type: :model do
       it { is_expected.to have_db_index(:updated_at) }
     end
   end
+
   context 'attributes' do
     let(:contact) { build :contact }
     it 'has first_name field' do
@@ -45,4 +47,16 @@ describe Contact, type: :model do
       expect(contact).to have_attribute(:updated_at)
     end
   end
+
+  context 'normalization' do
+    it 'normalizes a phone number with an extension' do
+      contact = create :contact, phone_number: '1-033-511-1831 x471'
+      expect(contact.phone_number).to eq('10335111831x471')
+    end
+    it 'normalizes a phone number without an extension' do
+      contact = create :contact, phone_number: '1-033-511-1831'
+      expect(contact.phone_number).to eq('10335111831')
+    end
+  end
+
 end

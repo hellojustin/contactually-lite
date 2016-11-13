@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Remove ActiveRecord and ActionController log statements from test output.
+  config.log_level = :error
 end
