@@ -6,7 +6,8 @@ RSpec.describe 'routes for Contacts', type: :routing do
     it 'routes to ContactsController#index' do
       expect(get: contacts_path).to route_to(
         controller: 'contacts',
-        action: 'index'
+        action: 'index',
+        format: :json
       )
     end
   end

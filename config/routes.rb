@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'contacts#index'
-  resources :contacts
-  resources :contacts_collection
+  resources :contacts, defaults: { format: :json }
+  resources :contacts_collection, defaults: { format: :json }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
