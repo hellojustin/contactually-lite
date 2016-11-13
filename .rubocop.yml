@@ -21,3 +21,15 @@ Style/Semicolon:
 
 Metrics/LineLength:
   Max: 100
+
+Style/EmptyLineBetweenDefs:
+  Enabled: false
+
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
