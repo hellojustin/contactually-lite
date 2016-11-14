@@ -49,9 +49,6 @@ group :development, :test do
   # Read more: https://github.com/rails/spring
   gem 'spring'
 
-
-
-
   # Let's write specs, not tests
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop-rspec'
