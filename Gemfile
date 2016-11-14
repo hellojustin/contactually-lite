@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2'
 gem 'responders', '~> 2.0'
 gem 'validates_email_format_of', '~> 1.6.3'
+gem 'react-rails', '~> 1.9.0'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 0.19.0'

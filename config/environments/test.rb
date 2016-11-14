@@ -42,4 +42,7 @@ Rails.application.configure do
 
   # Remove ActiveRecord and ActionController log statements from test output.
   config.log_level = :error
+
+  # Use the React development build
+  config.react.variant = :development
 end

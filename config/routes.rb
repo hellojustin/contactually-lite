@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'contacts#index'
+  root 'contactually#index'
   resources :contacts, defaults: { format: :json }
   resources :contact_collections, defaults: { format: :json }
 
