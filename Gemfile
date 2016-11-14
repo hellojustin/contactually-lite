@@ -52,8 +52,11 @@ group :development, :test do
 
   # Let's write specs, not tests
   gem 'rspec-rails', '~> 3.5'
-  gem 'rubocop-rspec'
+  gem 'rubocop-rspec', '~> 1.8.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'factory_girl_rails', '~> 4.7.0'
   gem 'faker', '~> 1.6.6'
+  gem 'konacha', '~> 4.0.0'
+  gem 'selenium-webdriver', '~> 3.0.1'
+  gem 'poltergeist', '~> 1.11.0'
 end

@@ -10,9 +10,7 @@ var ContactuallyApp = React.createClass({
 
   render: function() {
     return (
-      <AppBar
-        title='Contactually'>
-      </AppBar>
+      <AppBar title='Contactually'></AppBar>
     );
   }
 });
