@@ -1,10 +1,17 @@
-var React = require('react'),
-    ReactDOM = require('react-dom'),
-    ContactuallyApp = require('components/contactually_app');
+var React                = require('react'),
+    ReactDOM             = require('react-dom'),
+    Theme                = require('./theme'),
+    MuiThemeProvider     = require('material-ui/styles/MuiThemeProvider').default,
+    ContactuallyApp      = require('components/contactually_app'),
+    injectTapEventPlugin = require('react-tap-event-plugin');
+
+injectTapEventPlugin();
 
 $(function(){
   ReactDOM.render(
-    <div><ContactuallyApp label="hello" /></div>,
+    <MuiThemeProvider muiTheme={Theme}>
+      <ContactuallyApp/>
+    </MuiThemeProvider>,
     document.getElementById('ContactuallyApp')
   );
 });
