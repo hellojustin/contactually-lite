@@ -44,5 +44,5 @@ Rails.application.configure do
   config.log_level = :error
 
   # Use the React development build
-  config.react.variant = :development
+  # config.react.variant = :development
 end

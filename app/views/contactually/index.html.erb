@@ -1,1 +1,5 @@
-<%= react_component 'ContactuallyApp', contacts: @contacts %>
+<div id='ContactuallyApp'></div>
+
+<% content_for :foot do %>
+  <%= javascript_include_tag 'contactually' %>
+<% end %>
