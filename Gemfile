@@ -31,6 +31,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'foreman', '~> 0.82.0'
 gem 'rails_12factor', '~> 0.0.3'
 
+# Ensure consistent styling
+gem 'rubocop', require: false
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -46,12 +49,12 @@ group :development, :test do
   # Read more: https://github.com/rails/spring
   gem 'spring'
 
-  # Ensure consistent styling
-  gem 'rubocop', require: false
-  gem 'rubocop-rspec'
+
+
 
   # Let's write specs, not tests
   gem 'rspec-rails', '~> 3.5'
+  gem 'rubocop-rspec'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'factory_girl_rails', '~> 4.7.0'
   gem 'faker', '~> 1.6.6'
