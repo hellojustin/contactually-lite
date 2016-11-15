@@ -12,4 +12,19 @@ RSpec.describe 'routes for ContactCollections', type: :routing do
     end
   end
 
+  context 'destroy contact_collections' do
+    let(:route) { '/contact_collections/1' }
+    let(:expected_route) do
+      {
+        controller: 'contact_collections',
+        action: 'destroy',
+        id: '1',
+        format: :json
+      }
+    end
+    it 'Routes to contact_collections#destroy' do
+      expect(delete: route).to route_to(expected_route)
+    end
+  end
+
 end

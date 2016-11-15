@@ -47,6 +47,30 @@ var ContactActions = {
           data       : response.data
         });
       });
+  },
+
+  selectContacts : function(contacts) {
+    AppDispatcher.handleAction({
+      actionType : Constants.CONTACTS_SELECTED,
+      data       : contacts
+    });
+  },
+
+  deleteContacts : function(idsToDelete) {
+    var path = '/contact_collections/' + idsToDelete.toString();
+    ContactuallyLiteClient.delete(path)
+      .then(function(response) {
+        AppDispatcher.handleAction({
+          actionType : Constants.CONTACTS_DELETED,
+          data       : response.data
+        });
+      })
+      .catch(function(response) {
+        AppDispatcher.handleAction({
+          actionType : Constants.ERROR_DELETING_CONTACTS,
+          data       : response.data
+        })
+      });
   }
 
 };

@@ -4,6 +4,7 @@ var React                = require('react'),
     Snackbar             = mui.Snackbar,
     FloatingActionButton = mui.FloatingActionButton,
     ContentAdd           = require('material-ui/svg-icons/content/add').default,
+    ContentRemove        = require('material-ui/svg-icons/content/remove').default,
     ContactsTable        = require('./contacts_table'),
     AddContactDialog     = require('./add_contact_dialog'),
     ContactsStore        = require('../stores/contacts_store'),
@@ -16,12 +17,22 @@ var ContactuallyApp = React.createClass({
       snackbarOpen: false,
       snackbarMessage: '',
       snackbarAutohideTimeout: 3000,
-      contacts: []
+      contacts: ContactsStore.getContacts(),
+      selectedContacts : ContactsStore.getSelected()
     };
   },
 
   componentDidMount : function() {
     ContactActions.getContacts();
+    ContactsStore.addChangeListener( this.onContactsChange );
+    ContactsStore.addSelectionChangeListener( this.onSelectionChange );
+    ContactsStore.addDeletionCompletionListener( this.onDeleteComplete );
+  },
+
+  componentWillUnmount : function() {
+    ContactsStore.removeChangeListener( this.onContactsChange );
+    ContactsStore.removeSelectionChangeListener( this.onSelectionChange );
+    ContactsStore.removeDeletionCompletionListener( this.onDeleteComplete );
   },
 
   setSnackbarMessage : function( newMessage ) {
@@ -43,7 +54,33 @@ var ContactuallyApp = React.createClass({
     this.setState({ addContactDialogOpen : false });
   },
 
+  onContactsChange : function() {
+    this.setState({
+      contacts : ContactsStore.getContacts(),
+      selectedContacts : ContactsStore.getSelected()
+    });
+  },
+
+  onSelectionChange : function() {
+    this.setState({ selectedContacts : ContactsStore.getSelected() });
+  },
+
+  onDeleteComplete : function() {
+    ContactActions.getContacts();
+  },
+
+  deleteSelectedContacts : function() {
+    var idsToDelete = this.state.selectedContacts.map(function(rowNum) {
+      return this.state.contacts[rowNum].id;
+    }.bind(this));
+    ContactActions.deleteContacts(idsToDelete);
+  },
+
   render: function() {
+    var removeButtonStyles = { display : 'none'};
+    if (this.state.selectedContacts.length > 0) {
+      removeButtonStyles = { display : 'block'}
+    }
     return (
       <div id='themedComponents'>
         <AddContactDialog
@@ -55,8 +92,16 @@ var ContactuallyApp = React.createClass({
         <ContactsTable contactsStore={ContactsStore}></ContactsTable>
         <div className='buttons'>
           <FloatingActionButton
+            className='remove-contact button'
+            onClick={this.deleteSelectedContacts}
+            secondary={true}
+            style={removeButtonStyles}>
+            <ContentRemove/>
+          </FloatingActionButton>
+          <FloatingActionButton
             className='add-contact button'
-            onClick={this.openAddContactDialog}>
+            onClick={this.openAddContactDialog}
+            style={{display: 'block'}}>
             <ContentAdd/>
           </FloatingActionButton>
         </div>
