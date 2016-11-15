@@ -8,7 +8,8 @@ var React                 = require('react'),
     TableRowColumn        = mui.TableRowColumn,
     ContactActions        = require('../actions/contact_actions'),
     FilterByEmailControls = require('./filter_by_email_controls'),
-    SortByEmailControls   = require('./sort_by_email_controls');
+    SortByEmailControls   = require('./sort_by_email_controls'),
+    StringFormatter       = require('../util/string_formatter');
 
 var ContactsTable = React.createClass({
 
@@ -100,17 +101,20 @@ var ContactsTable = React.createClass({
           showRowHover={this.state.showRowHover}
           stripedRows={this.state.stripedRows}>
 
-          {this.state.contacts.map( (contact, index) => (
-            <TableRow
-              key={index}
-              selected={that.state.selectedContacts.indexOf(index) > -1}>
-              <TableRowColumn>{contact.first_name}</TableRowColumn>
-              <TableRowColumn>{contact.last_name}</TableRowColumn>
-              <TableRowColumn>{contact.phone_number}</TableRowColumn>
-              <TableRowColumn>{contact.email_address}</TableRowColumn>
-              <TableRowColumn>{contact.company_name}</TableRowColumn>
-            </TableRow>
-          ))}
+          {this.state.contacts.map( function (contact, index) {
+            var phone_number = StringFormatter.phoneNumber(contact.phone_number);
+            return (
+              <TableRow
+                key={index}
+                selected={that.state.selectedContacts.indexOf(index) > -1}>
+                <TableRowColumn>{contact.first_name}</TableRowColumn>
+                <TableRowColumn>{contact.last_name}</TableRowColumn>
+                <TableRowColumn>{phone_number}</TableRowColumn>
+                <TableRowColumn>{contact.email_address}</TableRowColumn>
+                <TableRowColumn>{contact.company_name}</TableRowColumn>
+              </TableRow>
+            );
+          })}
 
         </TableBody>
 
