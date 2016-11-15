@@ -1,4 +1,41 @@
 .button.add-contact
-  position: absolute
+  position: fixed
   right: 1rem
   bottom: 1rem
+
+.add-contact-dialog
+
+  .upload-target
+    position: relative
+    height: 6rem
+    width: 100%
+    margin-top: 1rem
+
+    .upload-target-bg
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      border: .25rem rgba(150, 150, 150, 1.0) dashed
+      background: rgba(200, 200, 200, 1.0)
+      border-radius: 1rem
+      transition: background 0.5s
+
+      &.file-hovering
+        border-color: rgba(100, 200, 100, 1.0)
+        background: rgba(150, 255, 150, 1.0)
+
+    .upload-target-message
+      text-align: center
+      position: relative
+      top: 2.25rem
+
+    .upload-target-field
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      width: 100%
+      opacity: 0
