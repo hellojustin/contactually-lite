@@ -1,8 +1,8 @@
-var React          = require('react'),
-    mui            = require('material-ui'),
-    Dialog         = mui.Dialog,
-    LinearProgress = mui.LinearProgress,
-    ContactActions = require('../actions/contact_actions');
+var React           = require('react'),
+    mui             = require('material-ui'),
+    Dialog          = mui.Dialog,
+    LinearProgress  = mui.LinearProgress,
+    ContactActions  = require('../actions/contact_actions');
 
 var AddContactDialog = React.createClass({
 
@@ -15,12 +15,13 @@ var AddContactDialog = React.createClass({
 
   propTypes : {
     open : React.PropTypes.bool,
-    onRequestClose : React.PropTypes.func
+    onRequestClose : React.PropTypes.func,
+    setSnackbarMessage : React.PropTypes.func
   },
 
   componentDidMount : function() {
     this.props.contactsStore.addUploadCompletionListener(
-        this.handleFileUploadCompletion);
+      this.handleFileUploadCompletion);
     this.props.contactsStore.addUploadProgressListener(
       this.handleFileUploadProgress);
     this.props.contactsStore.addUploadErrorListener(
@@ -30,7 +31,7 @@ var AddContactDialog = React.createClass({
 
   componentWillUnmount : function() {
     this.props.contactsStore.removeUploadCompletionListener(
-        this.handleFileUploadCompletion);
+      this.handleFileUploadCompletion);
     this.props.contactsStore.removeUploadProgressListener(
       this.handleFileUploadProgress);
     this.props.contactsStore.removeUploadErrorListener(
@@ -49,9 +50,11 @@ var AddContactDialog = React.createClass({
   },
 
   handleFileUploadCompletion : function() {
-    console.log("Woohoo! Upload Comploete");
+    var res = this.props.contactsStore.getUploadResults(),
+        msg = res.created + " Contacts created. " + res.updated + " Contacts updated.";
+    this.props.setSnackbarMessage(msg);
     ContactActions.getContacts();
-    this.props.onRequestClose();
+    this.onRequestClose();
   },
 
   handleFileUploadProgress : function() {
@@ -68,6 +71,11 @@ var AddContactDialog = React.createClass({
     ContactActions.uploadContacts(file);
   },
 
+  onRequestClose : function() {
+    this.props.onRequestClose();
+    this.setState({uploadProgress: 0});
+  },
+
   render : function() {
     var actions = [];
     return (
@@ -77,8 +85,8 @@ var AddContactDialog = React.createClass({
         actions={actions}
         modal={false}
         open={this.props.open}
-        onRequestClose={this.props.onRequestClose}>
-        Drag a file on the area below to upload it.
+        onRequestClose={this.onRequestClose}>
+        Drag a file onto the area below to import it.
 
         <form>
           <div className='upload-target'>

@@ -11,6 +11,7 @@ var CHANGE_EVENT          = 'change',
 var contactsStore = Object.assign({}, EventEmitter.prototype, {
   contacts : [],
   uploadProgress : {},
+  uploadResults: {},
 
   addChangeListener : function( callback ) {
     this.on(CHANGE_EVENT, callback);
@@ -58,6 +59,12 @@ var contactsStore = Object.assign({}, EventEmitter.prototype, {
   },
   updateUploadProgress : function( progress ) {
     this.uploadProgress = progress;
+  },
+  getUploadResults : function() {
+    return this.uploadResults;
+  },
+  updateUploadResults : function( results ) {
+    this.uploadResults = results;
   }
 
 });
@@ -71,6 +78,7 @@ AppDispatcher.register( function( payload ) {
       break;
     case Constants.CONTACTS_UPLOADED:
       contactsStore.updateUploadProgress( {} );
+      contactsStore.updateUploadResults( action.data );
       contactsStore.emit( UPLOAD_COMPLETE_EVENT );
       break;
     case Constants.CONTACTS_UPLOAD_PROGRESS:

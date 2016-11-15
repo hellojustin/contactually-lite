@@ -1,7 +1,6 @@
 var AppDispatcher = require('../dispatchers/app_dispatcher'),
     Constants = require('../constants'),
-    ContactuallyLiteClient = require('../clients/contactually_lite_client'),
-    Csrf = require('../util/csrf');
+    ContactuallyLiteClient = require('../clients/contactually_lite_client');
 
 var ContactActions = {
 
@@ -42,12 +41,12 @@ var ContactActions = {
           data       : response.data
         });
       })
-      .catch(function(response) {
-        AppDispatcher.handleAction({
-          actionType : Constants.ERROR_UPLOADING_CONTACTS,
-          data       : response.data
-        });
-      });
+      // .catch(function(response) {
+      //   AppDispatcher.handleAction({
+      //     actionType : Constants.ERROR_UPLOADING_CONTACTS,
+      //     data       : response.data
+      //   });
+      // });
   }
 
 };
