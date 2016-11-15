@@ -88,7 +88,10 @@ var ContactuallyApp = React.createClass({
           onRequestClose={this.closeAddContactDialog}
           contactsStore={ContactsStore}
           setSnackbarMessage={this.setSnackbarMessage}/>
-        <AppBar title='Contactually Lite'></AppBar>
+        <AppBar
+          title='Contactually Lite'
+          iconElementLeft={<div></div>}>
+        </AppBar>
         <ContactsTable contactsStore={ContactsStore}></ContactsTable>
         <div className='buttons'>
           <FloatingActionButton
