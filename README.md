@@ -1,6 +1,22 @@
 [![Build Status](https://travis-ci.org/hellojustin/contactually-lite.svg?branch=env-prep)](https://travis-ci.org/hellojustin/contactually-lite)
 
 
+##### Configuring a production environment
+On Heroku we must use two both the nodejs and ruby buildpacks, in that order.
+To configure:
+``` sh
+  $ heroku buildpacks:remove heroku/Ruby
+  $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs.git
+  $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby.git
+```
+
+##### Deploying to production
+``` sh
+  $ git push heroku master
+```
+
+
+
 ### Contactually Lite
 
 At its core, Contactually is an online database for your contacts. Your task
