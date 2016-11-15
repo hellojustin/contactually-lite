@@ -41,12 +41,12 @@ var ContactActions = {
           data       : response.data
         });
       })
-      // .catch(function(response) {
-      //   AppDispatcher.handleAction({
-      //     actionType : Constants.ERROR_UPLOADING_CONTACTS,
-      //     data       : response.data
-      //   });
-      // });
+      .catch(function(response) {
+        AppDispatcher.handleAction({
+          actionType : Constants.ERROR_UPLOADING_CONTACTS,
+          data       : response.data
+        });
+      });
   }
 
 };
