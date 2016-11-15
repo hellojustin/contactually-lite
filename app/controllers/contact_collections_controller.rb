@@ -3,7 +3,8 @@ class ContactCollectionsController < ApplicationController
   respond_to :json
 
   def create
-    collection = ContactCollection.import_from_file params[:upload]
+    tempfile = params[:upload].tempfile
+    collection = ContactCollection.import_from_file tempfile
     respond_with collection, location: nil
   end
 
