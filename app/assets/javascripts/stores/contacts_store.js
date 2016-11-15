@@ -12,10 +12,16 @@ var CHANGE_EVENT            = 'change',
     SELECTION_CHANGED_EVENT = 'selection-changed';
 
 var contactsStore = Object.assign({}, EventEmitter.prototype, {
-  contacts : [],
+  originalContacts : [],
+  filteredContacts : [],
   selectedContacts : [],
+  filters : [],
   uploadProgress : {},
   uploadResults: {},
+
+  sortingFunction : function( a, b ) {
+    return a.id - b.id;
+  },
 
   addChangeListener : function( callback ) {
     this.on(CHANGE_EVENT, callback);
@@ -74,10 +80,11 @@ var contactsStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   getContacts : function() {
-    return this.contacts;
+    this.filterAndSort();
+    return this.filteredContacts;
   },
   replaceContacts : function( newContacts ) {
-    this.contacts = newContacts;
+    this.originalContacts = newContacts;
   },
   getUploadProgress : function() {
     return this.uploadProgress;
@@ -94,12 +101,39 @@ var contactsStore = Object.assign({}, EventEmitter.prototype, {
   setSelected : function( selectedContacts ) {
     if (selectedContacts === 'none' ) { selectedContacts = []; }
     else if (selectedContacts === 'all'  ) {
-      selectedContacts = this.contacts.map(function(contact, i) { return i; });
+      selectedContacts = this.originalContacts.map(function(contact, i) {
+        return i;
+      });
     }
     this.selectedContacts = selectedContacts;
   },
   getSelected : function() {
     return this.selectedContacts;
+  },
+  addFilter : function( filterFunction ) {
+    if ( !this.filters.includes( filterFunction ) ) {
+      this.filters.push( filterFunction );
+    }
+  },
+  removeFilter : function( filterFunction ) {
+    filterIndex = this.filters.indexOf( filterFunction );
+    if ( filterIndex > -1 ) {
+      this.filters.splice( filterIndex, 1 );
+    }
+  },
+  setSortingFunction : function( sortFunction ) {
+    this.sortingFunction = sortFunction;
+  },
+  clearSortingFunction : function() {
+    this.sortingFunction = function( a, b ) { return a.id - b.id; };
+  },
+  filterAndSort : function() {
+    this.filteredContacts = this.originalContacts.filter( function(contact) {
+      return this.filters.every( function(filter){
+        return filter(contact);
+      });
+    }.bind(this));
+    this.filterdContacts = this.filteredContacts.sort(this.sortingFunction);
   }
 
 });
@@ -109,6 +143,7 @@ AppDispatcher.register( function( payload ) {
   switch ( action.actionType ) {
     case Constants.GET_CONTACTS:
       contactsStore.replaceContacts( action.data );
+      contactsStore.setSelected( [] );
       contactsStore.emit( CHANGE_EVENT );
       break;
     case Constants.CONTACTS_UPLOADED:
@@ -137,6 +172,22 @@ AppDispatcher.register( function( payload ) {
       contactsStore.setSelected( action.data );
       contactsStore.emit( SELECTION_CHANGED_EVENT );
       break;
+    case Constants.CONTACTS_ADD_FILTER:
+      contactsStore.addFilter( action.data );
+      contactsStore.emit( CHANGE_EVENT );
+      break;
+    case Constants.CONTACTS_REMOVE_FILTER:
+      contactsStore.removeFilter( action.data );
+      contactsStore.emit( CHANGE_EVENT );
+      break;
+    case Constants.CONTACTS_SET_SORTING:
+      contactsStore.setSortingFunction( action.data );
+      contactsStore.emit( CHANGE_EVENT );
+      break;
+    case Constants.CONTACTS_CLEAR_SORTING:
+      contactsStore.clearSortingFunction();
+      contactsStore.emit( CHANGE_EVENT );
+      break
     default:
       return true;
   }

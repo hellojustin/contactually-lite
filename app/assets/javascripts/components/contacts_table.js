@@ -1,12 +1,14 @@
-var React             = require('react'),
-    mui               = require('material-ui'),
-    Table             = mui.Table,
-    TableRow          = mui.TableRow,
-    TableBody         = mui.TableBody,
-    TableHeader       = mui.TableHeader,
-    TableHeaderColumn = mui.TableHeaderColumn,
-    TableRowColumn    = mui.TableRowColumn,
-    ContactActions    = require('../actions/contact_actions');
+var React                 = require('react'),
+    mui                   = require('material-ui'),
+    Table                 = mui.Table,
+    TableRow              = mui.TableRow,
+    TableBody             = mui.TableBody,
+    TableHeader           = mui.TableHeader,
+    TableHeaderColumn     = mui.TableHeaderColumn,
+    TableRowColumn        = mui.TableRowColumn,
+    ContactActions        = require('../actions/contact_actions'),
+    FilterByEmailControls = require('./filter_by_email_controls'),
+    SortByEmailControls   = require('./sort_by_email_controls');
 
 var ContactsTable = React.createClass({
 
@@ -75,11 +77,20 @@ var ContactsTable = React.createClass({
           adjustForCheckbox={this.state.showCheckboxes}
           enableSelectAll={this.state.enableSelectAll}>
           <TableRow>
-            <TableHeaderColumn tooltip='First Name'>First Name</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Last Name'>Last Name</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Phone Number'>Phone Number</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Email Address'>Email Address</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Company Name'>Company</TableHeaderColumn>
+            <TableHeaderColumn colSpan={2}>
+              <FilterByEmailControls />
+            </TableHeaderColumn>
+            <TableHeaderColumn colSpan={2}>
+              <SortByEmailControls />
+            </TableHeaderColumn>
+            <TableHeaderColumn colSpan={1} />
+          </TableRow>
+          <TableRow>
+            <TableHeaderColumn>First Name</TableHeaderColumn>
+            <TableHeaderColumn>Last Name</TableHeaderColumn>
+            <TableHeaderColumn>Phone Number</TableHeaderColumn>
+            <TableHeaderColumn>Email Address</TableHeaderColumn>
+            <TableHeaderColumn>Company</TableHeaderColumn>
           </TableRow>
         </TableHeader>
 

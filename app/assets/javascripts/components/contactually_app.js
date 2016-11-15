@@ -1,14 +1,14 @@
-var React                = require('react'),
-    mui                  = require('material-ui'),
-    AppBar               = mui.AppBar,
-    Snackbar             = mui.Snackbar,
-    FloatingActionButton = mui.FloatingActionButton,
-    ContentAdd           = require('material-ui/svg-icons/content/add').default,
-    ContentRemove        = require('material-ui/svg-icons/content/remove').default,
-    ContactsTable        = require('./contacts_table'),
-    AddContactDialog     = require('./add_contact_dialog'),
-    ContactsStore        = require('../stores/contacts_store'),
-    ContactActions       = require('../actions/contact_actions');
+var React                 = require('react'),
+    mui                   = require('material-ui'),
+    AppBar                = mui.AppBar,
+    Snackbar              = mui.Snackbar,
+    FloatingActionButton  = mui.FloatingActionButton,
+    ContentAdd            = require('material-ui/svg-icons/content/add').default,
+    ContentRemove         = require('material-ui/svg-icons/content/remove').default,
+    ContactsTable         = require('./contacts_table'),
+    AddContactDialog      = require('./add_contact_dialog'),
+    ContactsStore         = require('../stores/contacts_store'),
+    ContactActions        = require('../actions/contact_actions');
 
 var ContactuallyApp = React.createClass({
   getInitialState : function() {
@@ -114,8 +114,7 @@ var ContactuallyApp = React.createClass({
           action="dismiss"
           autoHideDuration={this.state.snackbarAutohideTimeout}
           onActionTouchTap={this.closeSnackbar}
-          onRequestClose={this.closeSnackbar}
-        />
+          onRequestClose={this.closeSnackbar} />
       </div>
     );
   }

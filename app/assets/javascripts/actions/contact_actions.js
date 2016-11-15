@@ -71,6 +71,33 @@ var ContactActions = {
           data       : response.data
         })
       });
+  },
+
+  addFilter : function( filterFunction ) {
+    AppDispatcher.handleAction({
+      actionType : Constants.CONTACTS_ADD_FILTER,
+      data       : filterFunction
+    });
+  },
+
+  removeFilter : function( filterFunction ) {
+    AppDispatcher.handleAction({
+      actionType : Constants.CONTACTS_REMOVE_FILTER,
+      data       : filterFunction
+    });
+  },
+
+  setSortingFunction : function ( sortingFunction ) {
+    AppDispatcher.handleAction({
+      actionType : Constants.CONTACTS_SET_SORTING,
+      data       : sortingFunction
+    });
+  },
+
+  clearSortingFunction : function () {
+    AppDispatcher.handleAction({
+      actionType : Constants.CONTACTS_CLEAR_SORTING,
+    });
   }
 
 };
