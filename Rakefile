@@ -7,7 +7,7 @@ require 'rubocop/rake_task'
 Rails.application.load_tasks
 
 desc 'The default task (runs :spec and :rubocop)'
-task default: [:rubocop, :spec, 'konacha:run'] {}
+task default: [:rubocop, :spec] {}
 
 unless Rails.env.production?
   RuboCop::RakeTask.new do |task|
