@@ -6,6 +6,7 @@
     "browserify": "~> 10.2.4",
     "browserify-incremental": "^3.0.1",
     "flux": "^3.1.0",
+    "jquery": "^3.1.1",
     "material-ui": "^0.16.2",
     "react": "^15.3.2",
     "react-addons-create-fragment": "^15.3.2",
@@ -14,7 +15,8 @@
     "react-addons-update": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-tap-event-plugin": "^1.0.0",
-    "reactify": "^1.1.1"
+    "reactify": "^1.1.1",
+    "sinon": "^1.17.6"
   },
   "license": "MIT",
   "engines": {

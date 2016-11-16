@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatchers/app_dispatcher'),
     Constants     = require('../constants'),
-    EventEmitter  = require('events');
+    EventEmitter  = require('events'),
+    $             = require('jquery');
 
 var CHANGE_EVENT            = 'change',
     UPLOAD_COMPLETE_EVENT   = 'upload-complete',
@@ -11,7 +12,7 @@ var CHANGE_EVENT            = 'change',
     DELETION_ERROR_EVENT    = 'deletion-error',
     SELECTION_CHANGED_EVENT = 'selection-changed';
 
-var contactsStore = Object.assign({}, EventEmitter.prototype, {
+var contactsStore = $.extend({}, EventEmitter.prototype, {
   originalContacts : [],
   filteredContacts : [],
   selectedContacts : [],

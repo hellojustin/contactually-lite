@@ -2,7 +2,8 @@ var React           = require('react'),
     mui             = require('material-ui'),
     Dialog          = mui.Dialog,
     LinearProgress  = mui.LinearProgress,
-    ContactActions  = require('../actions/contact_actions');
+    ContactActions  = require('../actions/contact_actions'),
+    $               = require('jquery');
 
 var AddContactDialog = React.createClass({
 
